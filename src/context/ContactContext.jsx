@@ -40,7 +40,8 @@ export const ContactProvider = ({ children }) => {
       const currentContacts = currentData.contacts || [];
 
       // 2. Create new contact with ID
-      const newContact = { ...contact, id: Date.now().toString() };
+      const newId = Math.floor(Math.random() * 900 + 10).toString();
+      const newContact = { ...contact, id: newId };
       
       // 3. Update the contacts array
       const updatedContacts = [...currentContacts, newContact];
