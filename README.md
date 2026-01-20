@@ -1,70 +1,174 @@
-# Getting Started with Create React App
+# Contact Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive Contact Management System built with **React.js**. This application allows users to manage their contact list with features like adding, viewing, editing, deleting, searching, and filtering contacts. It uses **Context API** for global state management and **JSON Server** as a mock REST API backend.
 
-## Available Scripts
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [API Endpoints](#api-endpoints)
+- [Database Schema](#database-schema)
+- [Contributing](#contributing)
+- [License](#license)
+- [Project Directory Tree](#project-directory-tree)
 
-In the project directory, you can run:
+## Project Overview
 
-### `npm start`
+This project was developed to demonstrate proficiency in:
+- **React.js**: Functional components, Hooks (`useState`, `useEffect`, `useContext`).
+- **Context API**: Managing global application state.
+- **React Router**: Client-side routing for navigation.
+- **CRUD Operations**: Interacting with a REST API (`axios`).
+- **Bootstrap 5**: Responsive UI styling.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Key Features
+- **Dashboard**: View all contacts in a tabular format.
+- **Search**: Real-time filtering by First Name, Last Name, Email, or Phone.
+- **Sorting**: Sort contacts by Name (A-Z) or creation order (Oldest).
+- **Modals**: View and Edit contact details without leaving the page.
+- **Validation**: Required field checks for forms.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+Ensure you have **Node.js** and **npm** installed on your machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1.  **Clone the repository** (if applicable) or navigate to the project folder:
+    ```bash
+    cd contact-app
+    ```
 
-### `npm run build`
+2.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This application requires two processes to run simultaneously: the JSON Server (Backend) and the React Application (Frontend).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Start the Backend Server
+The application uses `json-server` to mock a REST API. It runs on port **5000**.
+```bash
+npm run server
+```
+*   *Note: This watches the `db.json` file for changes.*
 
-### `npm run eject`
+### 2. Start the React App
+Open a new terminal window/tab and start the frontend development server. It runs on port **3000**.
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The application will automatically open at `http://localhost:3000` in your default browser.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Configuration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Environment Variables & Ports
+- **Frontend**: Runs on port `3000` by default.
+- **Backend**: Configured in `package.json` to run on port `5000`.
+  ```json
+  "server": "json-server --watch db.json --port 5000"
+  ```
+- **API Base URL**: The base URL for API requests is defined in `src/context/ContactContext.jsx`:
+  ```javascript
+  const res = await axios.get('http://localhost:5000/contacts');
+  ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API Endpoints
 
-## Learn More
+The application interacts with the following REST endpoints provided by JSON Server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/contacts` | Fetch all contacts. |
+| `GET` | `/contacts/:id` | Fetch a specific contact by ID. |
+| `POST` | `/contacts` | Create a new contact. |
+| `PUT` | `/contacts/:id` | Update an existing contact. |
+| `DELETE` | `/contacts/:id` | Delete a contact. |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Database Schema
 
-### Code Splitting
+The data is stored in `db.json`. Below is the schema for a single contact object:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```json
+{
+  "id": "number | string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string"
+}
+```
 
-### Analyzing the Bundle Size
+**Example Data:**
+```json
+{
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Alfred",
+      "lastName": "Kuhlman",
+      "email": "alfred@test.com",
+      "phone": "98989898",
+      "address": "123 Main St, New York, NY"
+    }
+  ]
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contributing
 
-### Making a Progressive Web App
+Contributions are welcome! If you would like to improve this project:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1.  Fork the repository.
+2.  Create a new feature branch (`git checkout -b feature/YourFeatureName`).
+3.  Commit your changes (`git commit -m 'Add some feature'`).
+4.  Push to the branch (`git push origin feature/YourFeatureName`).
+5.  Open a Pull Request.
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is open-source and available under the **MIT License**.
 
-### Deployment
+## Project Directory Tree
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```text
+contact-app/
+├── .gitignore
+├── db.json
+├── package-lock.json
+├── package.json
+├── README.md
+├── public/
+│   ├── _redirects
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src/
+    ├── App.css
+    ├── App.jsx
+    ├── App.test.jsx
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── reportWebVitals.js
+    ├── setupTests.js
+    ├── assets/
+    │   └── css/
+    │       ├── bootstrap.min.css
+    │       └── custom.css
+    ├── components/
+    │   ├── ContactModal.jsx
+    │   ├── ContactRow.jsx
+    │   └── Header.jsx
+    ├── context/
+    │   └── ContactContext.jsx
+    └── pages/
+        ├── AddContact.jsx
+        └── Home.jsx
+```
