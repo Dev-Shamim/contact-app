@@ -19,7 +19,8 @@ const mockContacts = [
 ];
 
 test('renders All Contacts and fetches data', async () => {
-  axios.get.mockResolvedValue({ data: mockContacts });
+  // Update mock to match the new API structure: { data: { contacts: [...] } }
+  axios.get.mockResolvedValue({ data: { contacts: mockContacts } });
 
   render(
     <ContactProvider>

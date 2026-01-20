@@ -31,8 +31,11 @@ const Home = () => {
     setSelectedContact(null);
   };
 
+  if (loading) return <div className="text-center mt-5">Loading...</div>;
+
   // Filter & Sort
-  let displayedContacts = contacts.filter((c) => {
+  const safeContacts = Array.isArray(contacts) ? contacts : [];
+  let displayedContacts = safeContacts.filter((c) => {
      if (!c) return false;
      const searchText = search.toLowerCase();
      return (
@@ -50,8 +53,6 @@ const Home = () => {
   } else if (sortType === "oldest") {
     displayedContacts.sort((a, b) => a.id - b.id);
   }
-
-  if (loading) return <div className="text-center mt-5">Loading...</div>;
 
   return (
     <main className="py-5">
