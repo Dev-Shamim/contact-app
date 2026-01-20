@@ -14,7 +14,7 @@ export const ContactProvider = ({ children }) => {
 
   const fetchContacts = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/contacts');
+      const res = await axios.get('https://fakedbjson.onrender.com/');
       setContacts(res.data);
       setLoading(false);
     } catch (err) {
@@ -24,19 +24,19 @@ export const ContactProvider = ({ children }) => {
 
   // Add Contact
   const addContact = async (contact) => {
-    const res = await axios.post('http://localhost:5000/contacts', contact);
+    const res = await axios.post('https://fakedbjson.onrender.com/', contact);
     setContacts([...contacts, res.data]);
   };
 
   // Delete Contact
   const deleteContact = async (id) => {
-    await axios.delete(`http://localhost:5000/contacts/${id}`);
+    await axios.delete(`https://fakedbjson.onrender.com/${id}`);
     setContacts(contacts.filter((contact) => contact.id !== id));
   };
 
   // Update Contact
   const updateContact = async (id, updatedContact) => {
-    const res = await axios.put(`http://localhost:5000/contacts/${id}`, updatedContact);
+    const res = await axios.put(`https://fakedbjson.onrender.com/${id}`, updatedContact);
     setContacts(
       contacts.map((contact) => (contact.id === id ? res.data : contact))
     );
